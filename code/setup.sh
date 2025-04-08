@@ -23,4 +23,16 @@ scp -r neuron.umd.edu:/data/neuron/NET/fmriprep/sub-NET\*.html ./
 
 
 
+# Complete video transcriptions and annotations
 
+video_list=( grapes_hd.avi wedding_hd.avi awkward_hd.avi 
+             ballet_hd.avi penguins_hd.avi sharktank_hd.avi 
+             basketball_hd.avi onion_hd.avi cooking_hd.avi 
+             mars_hd.avi afv_hd.avi cleese_hd.avi 
+             partly_cloudy_hd.avi the_present_hd.avi despicable_hd.avi )
+
+for video in "${video_list[@]}"; do
+    python code/video_transcription.py \
+        -i derivatives/task-naturalistic/stimuli/${video} \
+        -o derivatives/speech_analysis/
+done
