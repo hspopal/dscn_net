@@ -81,7 +81,7 @@ video_clip = VideoFileClip(input_path)
 # Extract the audio  from the video
 if clip_start and clip_end:
     audio_clip = video_clip.subclip(clip_start, clip_end)
-    audio_path = clip_name+'_'+str(clip_start)+'-'+str(clip_end)+'.wav'
+    audio_path = clip_name+'_'+str(clip_start)+'-'+str(clip_end)
 else:
     audio_clip = video_clip.audio
     audio_path = clip_name+'.wav'
@@ -89,13 +89,12 @@ else:
 
 print(audio_path)
 
-audio_clip.write_audiofile(outp_dir+'audio_files/'+audio_path, codec='pcm_s16le')
-
+audio_clip.write_audiofile(outp_dir+'audio_files/'+audio_path+'.wav', codec='pcm_s16le')
 
 
 # Transcribe
 model = whisper.load_model("small")
-result = model.transcribe(outp_dir+'audio_files/'+audio_path, word_timestamps=True)
+result = model.transcribe(outp_dir+'audio_files/'+audio_path+'.wav', word_timestamps=True)
 
 # Export transcription
 if clip_start and clip_end:
